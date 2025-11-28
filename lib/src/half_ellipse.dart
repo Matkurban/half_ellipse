@@ -58,18 +58,30 @@ class HalfEllipse extends StatelessWidget {
       height: height,
       padding: padding,
       alignment: alignment,
-      decoration: BoxDecoration(color: gradient == null ? color : null, gradient: gradient),
+      decoration: BoxDecoration(
+        color: gradient == null ? color : null,
+        gradient: gradient,
+      ),
       child: child,
     );
     return ClipPath(
-      clipper: _HalfEllipseClipper(top: top, shape: shape, depthFactor: depthFactor),
+      clipper: _HalfEllipseClipper(
+        top: top,
+        shape: shape,
+        depthFactor: depthFactor,
+      ),
       child: content,
     );
   }
 }
 
 /// 统一创建半椭圆路径的函数，供 Clipper 和 Painter 共用。
-Path _createHalfEllipsePath(Size size, bool top, HalfEllipseShape shape, double depthFactor) {
+Path _createHalfEllipsePath(
+  Size size,
+  bool top,
+  HalfEllipseShape shape,
+  double depthFactor,
+) {
   final path = Path();
   final h = size.height.clamp(0.0, double.infinity);
   final w = size.width;
@@ -77,7 +89,11 @@ Path _createHalfEllipsePath(Size size, bool top, HalfEllipseShape shape, double 
   if (shape == HalfEllipseShape.ellipse) {
     // 使用真正椭圆弧，平滑度最佳。
     final ry = h * depthFactor; // 纵向半径
-    final rect = Rect.fromCenter(center: Offset(w / 2, top ? 0 : h), width: w, height: ry * 2);
+    final rect = Rect.fromCenter(
+      center: Offset(w / 2, top ? 0 : h),
+      width: w,
+      height: ry * 2,
+    );
     if (top) {
       // 上平下弧：显示椭圆下半部分
       path.moveTo(0, 0);
@@ -125,7 +141,11 @@ Path _createHalfEllipsePath(Size size, bool top, HalfEllipseShape shape, double 
 }
 
 class _HalfEllipseClipper extends CustomClipper<Path> {
-  _HalfEllipseClipper({required this.top, required this.shape, required this.depthFactor});
+  _HalfEllipseClipper({
+    required this.top,
+    required this.shape,
+    required this.depthFactor,
+  });
   final bool top;
   final HalfEllipseShape shape;
   final double depthFactor;
@@ -138,7 +158,9 @@ class _HalfEllipseClipper extends CustomClipper<Path> {
 
   @override
   bool shouldReclip(covariant _HalfEllipseClipper oldClipper) =>
-      oldClipper.top != top || oldClipper.shape != shape || oldClipper.depthFactor != depthFactor;
+      oldClipper.top != top ||
+      oldClipper.shape != shape ||
+      oldClipper.depthFactor != depthFactor;
 }
 
 class HalfEllipsePainter extends CustomPainter {
@@ -164,7 +186,9 @@ class HalfEllipsePainter extends CustomPainter {
     if (gradient != null) {
       // gradient 的 shader 应用于整个组件的矩形区域
       paint = Paint()
-        ..shader = gradient!.createShader(Rect.fromLTWH(0, 0, size.width, size.height));
+        ..shader = gradient!.createShader(
+          Rect.fromLTWH(0, 0, size.width, size.height),
+        );
     } else {
       paint = Paint()..color = color;
     }

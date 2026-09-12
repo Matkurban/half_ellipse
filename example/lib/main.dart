@@ -127,9 +127,6 @@ class _HalfEllipseShowcaseState extends State<HalfEllipseShowcase> {
           ),
           Container(
             padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.surfaceContainerHighest,
-            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

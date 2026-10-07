@@ -1,9 +1,12 @@
+## 3.0.0
+
+- remove 'material_ui'  in `pubspec.yaml`
+
 ## 2.0.0
 
 ### Breaking Changes ⚠️
 
-* **Dependency Migration**: Replaced legacy Flutter package imports with `material_ui` and `cupertino_ui` following the Flutter 3.47 package decoupling.
-* **SDK Constraints**: Bumped minimum Flutter SDK requirement to `>=3.47.0`.
+* **SDK Constraints**: Bumped minimum Flutter SDK requirement to `>=3.10.0`.
 
 ### Features & Improvements
 
